@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning - Muhammad Rizki Al-Fathir
+![image-6](https://github.com/user-attachments/assets/e097d802-ed83-4327-bb08-88e4eae55a4e)![image-2](https://github.com/user-attachments/assets/1bf8c016-87a3-45fc-90aa-a9281894344a)# Laporan Proyek Machine Learning - Muhammad Rizki Al-Fathir
 
 ## Project Overview
 
@@ -66,34 +66,36 @@ Keberagaman genre ini memungkinkan sistem rekomendasi untuk memberikan saran fil
 
 ### Exploratory Data Analysis
 #### Univariate Analysis
-![alt text](image.png)
+![image](https://github.com/user-attachments/assets/eec23a2b-a19e-4785-bf27-58bcb63ecdc2)
+
 Berdasarkan hasil analisis univariat pada kolom `genres`, dapat dilihat bahwa genre "Drama" merupakan genre yang paling dominan dan paling sering muncul dalam dataset film yang digunakan. Hal ini menunjukkan bahwa film dengan genre drama memiliki proporsi yang lebih besar dibandingkan genre lainnya, sehingga kemungkinan besar preferensi pengguna terhadap genre ini juga cukup tinggi. 
 
 
 ## Data Preparation
 ### Handle Missing Value
 Pada dataset ini, terdapat nilai `(no genres listed)` pada field `genres`. Dalam konteks studi kasus ini, nilai tersebut dianggap sebagai missing value karena sistem rekomendasi berfokus pada informasi genre.
-![alt text](image-1.png)
+![image-1](https://github.com/user-attachments/assets/b78a44bb-bb13-4492-9243-611eed2504e3)
+
 
 Oleh karena itu, baris data dengan nilai tersebut dihapus agar tidak memengaruhi hasil rekomendasi. Meskipun jumlahnya cukup signifikan, proporsi data yang besar membuat penghapusan ini tidak akan berdampak signifikan terhadap hasil rekomendasi.
 
 ### Handle Duplicated Data
 Dalam dataset ini terdapat beberapa film yang memiliki entri lebih dari 1 dengan genre dan id yang berbeda.
 
-![alt text](image-2.png)
+![image-2](https://github.com/user-attachments/assets/f8f9935e-2f4a-4fe5-8616-853dabbfc48b)
 
 Pada studi kasus ini, data duplikat akan dihapus dan hanya satu entri yang dipertahankan untuk setiap film. Langkah ini dilakukan guna menyederhanakan proses analisis serta menghindari potensi bias akibat keberadaan genre ganda pada film yang sama.
 
 ### Membuat List Genre dan Melakukan Encoding
 Tahapan ini merupakan tahapan pemrosesan field `genres`, yaitu mengubah representasi teks genre yang semula berupa string dengan pemisah pipe (`|`) menjadi sebuah list Python yang dapat diproses lebih lanjut. Misalnya, data `"Adventure|Animation|Children|Comedy|Fantasy"` akan diubah menjadi `['Adventure', 'Animation', 'Children', 'Comedy', 'Fantasy']`.
 
-![alt text](image-3.png)
+![image-3](https://github.com/user-attachments/assets/7856e839-6527-4a64-b1f2-fa211af48cec)
 
 Tahapan ini diperlukan agar setiap genre pada film dapat diidentifikasi secara individual, sehingga memudahkan proses analisis dan pemodelan. Dengan format list, kita dapat melakukan encoding genre ke dalam bentuk numeril yang sangat penting untuk algoritma machine learning yang membutuhkan input numerik.
 
 Tahapan encoding dilakukan dengan pendekatan **MultiLabelBinarizer** dari library scikit-learn. Pendekatan ini sangat efektif untuk mengubah data kategori jamak (multi-label) seperti genre film menjadi representasi numerik yang dapat diproses oleh algoritma machine learning. Dengan MultiLabelBinarizer, setiap genre unik dalam dataset akan direpresentasikan sebagai satu kolom (fitur) biner, di mana nilai `1` menunjukkan film tersebut memiliki genre terkait, dan `0` jika tidak.
 
-![alt text](image-4.png)
+![image-4](https://github.com/user-attachments/assets/f78cfeb4-c4f3-4730-96ac-a0e4bf717a2b)
 
 Sebagai contoh, jika terdapat tiga genre unik: `Action`, `Comedy`, dan `Drama`, maka film dengan genre `Action|Comedy` akan di-encode menjadi `[1, 1, 0]`. Proses ini memungkinkan setiap film direpresentasikan dalam bentuk vektor fitur biner yang panjangnya sama dengan jumlah genre unik di dataset.
 
@@ -130,12 +132,14 @@ Cosine Similarity mengukur kesamaan antara dua entitas (tiap genre yang telah di
 
 #### Hasil Top-N Recommendation
 ##### Nearest Neighbors  
-![alt text](image-5.png)
+
+![image-5](https://github.com/user-attachments/assets/ba449cc3-b844-4f3f-9e1c-108c51e4213a)
 
 Hasil Top-N Recommendation dari algoritma Nearest Neighbors diatas menunjukan hasil yang sesuai. Film yang direkomendasikan memiliki genre yang sama dengan film yang menjadi input
 
 ##### Cosine Similarity
-![alt text](image-6.png)
+
+![image-6](https://github.com/user-attachments/assets/64cbba4d-0150-4fd5-8f7e-f054ff5d20f3)
 
 Hasil Top-N Recommendation dari algoritma Cosine Similarity juga menunjukan hasil yang sesuai, hanya saja terdapat perbedaan urutan film yang direkomendasikannya, tetapi dari keseluruhan film, similarity score nya sama, yaitu 1. Artinya genre hasil rekomendasi dengan film input itu identik.
 
@@ -156,12 +160,15 @@ Jadi, jika sistem merekomendasikan 10 film, dan 7 di antaranya adalah film yang 
 Precision penting untuk menilai kualitas rekomendasi karena semakin tinggi precision, semakin banyak rekomendasi yang benar-benar sesuai dengan preferensi pengguna (genre yang dicari)
 
 ### Hasil Evaluasi Precision pada Nearest Neighbors
-![alt text](image-7.png)
+
+![image-7](https://github.com/user-attachments/assets/786a0aec-91ca-4ea7-aa31-b71284f5bd9f)
 
 Berdasarkan hasil evaluasi precision di algoritma Nearest Neighbors, diperoleh nilai precision yang sempurna. Hal ini menunjukkan bahwa seluruh film yang direkomendasikan memiliki genre yang sesuai dengan genre pada film input, sehingga rekomendasi yang dihasilkan sangat relevan.
 
 ### Hasil Evaluasi Precision pada Cosine Similarity
-![alt text](image-8.png)
+
+![image-8](https://github.com/user-attachments/assets/8976248a-73f9-44b7-bec4-8c198ce1712c)
+
 Berdasarkan hasil evaluasi precision pada algoritma Cosine Similarity, diperoleh nilai precision yang sempurna. Hal ini menunjukkan bahwa data yang digunakan memiliki representasi fitur yang optimal, sehingga kedua algoritma mampu menghasilkan rekomendasi yang sangat relevan dengan nilai precision maksimal.
 
 
