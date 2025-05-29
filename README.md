@@ -148,13 +148,17 @@ Tahapan ini merupakan tahapan pemrosesan field `genres`, yaitu mengubah represen
 
 ![image-3](https://github.com/user-attachments/assets/7856e839-6527-4a64-b1f2-fa211af48cec)
 
-Tahapan ini diperlukan agar setiap genre pada film dapat diidentifikasi secara individual, sehingga memudahkan proses analisis dan pemodelan. Dengan format list, kita dapat melakukan encoding genre ke dalam bentuk numeril yang sangat penting un
+Tahapan ini diperlukan agar setiap genre pada film dapat diidentifikasi secara individual, sehingga memudahkan proses analisis dan pemodelan. Dengan format list, kita dapat melakukan encoding genre ke dalam bentuk numerik yang sangat penting untuk keperluan encoding
 
-### Menggabungkan dengan dataset Ratings
+### Menggabungkan dengan dataset Ratings dan merubah Format Timestamp
 
 ![image-14](https://github.com/user-attachments/assets/ee73cbd7-1330-4fbc-a8b5-fe03ae2a5c21)
 
 Kedua dataset digabungkan dengan merge dengan opsi left untuk menjaga nilai dari dataset ratings.
+
+![image-16](https://github.com/user-attachments/assets/86deda2f-f242-42d4-80b9-84fdcd3dd6d5)
+
+Format timestamp yang awalnya format Unix dirubah ke format datetime untuk memudahkan pembacaan
 
 ## Data Preparation
 
@@ -176,7 +180,7 @@ Nilai null tersebut akan dihapus karena memang sulit untuk diketahui nilainya se
 ### Handle Duplicated Data
 Dalam dataset ini terdapat beberapa film yang memiliki entri lebih dari 1 dengan genre dan id yang berbeda.
 
-![image-2](https://github.com/user-attachments/assets/f8f9935e-2f4a-4fe5-8616-853dabbfc48b)
+![image-22](https://github.com/user-attachments/assets/8bc3d4ce-3b0f-47cb-af18-ac3c02566606)
 
 Pada studi kasus ini, data duplikat akan dihapus dan hanya satu entri yang dipertahankan untuk setiap film. Langkah ini dilakukan guna menyederhanakan proses analisis serta menghindari potensi bias akibat keberadaan genre ganda pada film yang sama.
 
@@ -187,12 +191,13 @@ Setelah merging, terdapat beberapa movieId yang identik karena merging tersebut 
 
 Hasil akhir berbeda dengan df_movies, karena pada dataset ini, baris movies yang tidak ter rating di drop juga. menyisakan data movieId unik yang memang ter rating oleh user. Karena rasio dataset masih besar, maka cara ini masih bisa dilakukan
 
-### Membuat List Genre dan Melakukan Encoding
-Tahapan ini merupakan tahapan pemrosesan field `genres`, yaitu mengubah representasi teks genre yang semula berupa string dengan pemisah pipe (`|`) menjadi sebuah list Python yang dapat diproses lebih lanjut. Misalnya, data `"Adventure|Animation|Children|Comedy|Fantasy"` akan diubah menjadi `['Adventure', 'Animation', 'Children', 'Comedy', 'Fantasy']`.
+### Persiapan Dataset
 
-![image-3](https://github.com/user-attachments/assets/7856e839-6527-4a64-b1f2-fa211af48cec)
+![alt text](image-25.png)
+![alt text](image-26.png)
+Dataset yang digunakan untuk pemodelan dalam studi kasus ini hanyalah field `movieId`, `title` dan `genres` hal ini dilakukan karena pemodelan hanya menggunakan pendekatan Content-Based Filtering
 
-Tahapan ini diperlukan agar setiap genre pada film dapat diidentifikasi secara individual, sehingga memudahkan proses analisis dan pemodelan. Dengan format list, kita dapat melakukan encoding genre ke dalam bentuk numeril yang sangat penting untuk algoritma machine learning yang membutuhkan input numerik.
+### Melakukan Encoding
 
 Tahapan encoding dilakukan dengan pendekatan **MultiLabelBinarizer** dari library scikit-learn. Pendekatan ini sangat efektif untuk mengubah data kategori jamak (multi-label) seperti genre film menjadi representasi numerik yang dapat diproses oleh algoritma machine learning. Dengan MultiLabelBinarizer, setiap genre unik dalam dataset akan direpresentasikan sebagai satu kolom (fitur) biner, di mana nilai `1` menunjukkan film tersebut memiliki genre terkait, dan `0` jika tidak.
 
@@ -205,7 +210,7 @@ Dengan encoding ini, data genre siap digunakan sebagai input pada model rekomend
 
 
 ## Modeling
-Pada studi kasus ini, digunakan dua pendekatan yang berbeda, yaitu Nearest Neighbors dengan Euclidean Distance dan Cosine Similarity.
+Pada studi kasus ini, digunakan pendekatan Content-Based Filtering dengan dua algoritma yang berbeda, yaitu Nearest Neighbors dengan Euclidean Distance dan Cosine Similarity.
 
 #### Nearest Neighbors
 Algoritma Nearest Neighbors bekerja dengan mengukur jarak atau kedekatan antara data baru dengan semua data yang sudah ada dalam dataset. Data baru tersebut kemudian akan diklasifikasikan atau nilainya diprediksi berdasarkan mayoritas kelas atau rata-rata nilai dari sejumlah "tetangga" terdekatnya (sejumlah k data terdekat). Dalam studi kasus ini, menggunakan metric `Euclidean Distance` sebagai metric jarak nya
