@@ -79,25 +79,35 @@ Keberagaman genre ini memungkinkan sistem rekomendasi untuk memberikan saran fil
 ### Dataset Quality
 #### Dataset Movies
 ##### Missing Values
-![alt text](image-21.png)
+
+![image-21](https://github.com/user-attachments/assets/2ea38581-61cf-411b-91ff-71b0aa4121fa)
+
 Untuk kondisi awal dataset, terdapat 5062 baris missing value pada kolom genres. Walau ini tidak secara langsung missing value, jika suatu baris memiliki kolom genre dengan nilai `no genres listed` artinya baris tersebut tidak mempunyai data genre, sedangkan data genre sangatlah penting untuk sistem rekomendasi pendekatan Content-Based Filtering
 
 ##### Duplicated Values
-![alt text](image-22.png)
+
+![image-22](https://github.com/user-attachments/assets/8bc3d4ce-3b0f-47cb-af18-ac3c02566606)
+
 Untuk kondisi awal dataset, terdapat 82 baris duplikat pada kolom title.
 
 
 #### Dataset Rating
 ##### Missing Values
-![alt text](image-23.png)
+
+![image-23](https://github.com/user-attachments/assets/cc3a2c96-edec-460a-a1aa-bab08eb17a6d)
+
 Untuk kondisi awal dataset Rating, tidak terdapat missing value
 
 ##### Duplicated Values
-![alt text](image-24.png)
+
+![image-24](https://github.com/user-attachments/assets/0fca8a09-92b3-405c-8b1b-f3de79104a3b)
+
 Untuk kondisi awal dataset, tidak terdapat baris duplikat
 
 ##### Outliers
-![alt text](images/image-10.png)
+
+![image-10](https://github.com/user-attachments/assets/ad0b9d05-8a06-4aae-bcd0-d414de1efe9f)
+
 Pada dataset Rating, terdapat outlier berupa pengguna yang memberikan jumlah rating film yang sangat tinggi dibandingkan pengguna lainnya. Namun karena pendekatan yang digunakan adalah Content-Based filtering, maka outlier ini dapat dihiraukan
 
 
@@ -110,19 +120,25 @@ Berdasarkan hasil analisis univariat pada kolom `genres`, dapat dilihat bahwa ge
 
 ##### Datasets Ratings
 
-![alt text](image-9.png)
+
+![image-9](https://github.com/user-attachments/assets/1161a2b7-9300-4871-b089-31958def9654)
+
 Dapat dilihat rating `4.0` memiliki jumlah terbanyak dibandingkan dengan rating yang lain
 
 ###### Distribusi User
-![alt text](image-10.png)
-![alt text](image-11.png)
-![alt text](image-12.png)
+![image-10](https://github.com/user-attachments/assets/7aae25d7-e405-420e-96cc-642873ce332a)
+
+![image-11](https://github.com/user-attachments/assets/eb6d56bf-b254-4ab3-86c4-729b06d394a4)
+
+![image-12](https://github.com/user-attachments/assets/3dfa5245-a557-4136-8714-5875199a294c)
+
 
 Rating terbanyak dilakukan oleh userId 72315, dan paling sedikit dilakukan oleh userId 51. Rata rata user melakukan rating sebanyak 153 Rating
 
 #### Multivariate Analysis
 ##### Datasets Ratings
-![alt text](image-13.png)
+
+![image-13](https://github.com/user-attachments/assets/4c34a08c-e3d9-4f8e-a0a0-586986345a1f)
 
 Plot menggambarkan bahwa rata-rata rating pengguna menjadi lebih stabil dan kurang ekstrem seiring dengan bertambahnya jumlah rating yang mereka berikan. Pengguna dengan sedikit rating bisa memiliki rata-rata yang sangat bervariasi karena sensitivitas terhadap rating individual, sementara pengguna yang sangat aktif cenderung memiliki rata-rata yang lebih moderat dan terkonsentrasi. Ini adalah perilaku yang diharapkan secara statistik: semakin banyak data poin (jumlah rating), estimasi rata-rata akan semakin mendekati "nilai sebenarnya" dan variansnya akan menurun.
 
@@ -135,7 +151,8 @@ Tahapan ini merupakan tahapan pemrosesan field `genres`, yaitu mengubah represen
 Tahapan ini diperlukan agar setiap genre pada film dapat diidentifikasi secara individual, sehingga memudahkan proses analisis dan pemodelan. Dengan format list, kita dapat melakukan encoding genre ke dalam bentuk numeril yang sangat penting un
 
 ### Menggabungkan dengan dataset Ratings
-![alt text](image-14.png)
+
+![image-14](https://github.com/user-attachments/assets/ee73cbd7-1330-4fbc-a8b5-fe03ae2a5c21)
 
 Kedua dataset digabungkan dengan merge dengan opsi left untuk menjaga nilai dari dataset ratings.
 
@@ -147,12 +164,13 @@ Pada dataset ini, terdapat nilai `(no genres listed)` pada field `genres`. Dalam
 
 
 
-
 Oleh karena itu, baris data dengan nilai tersebut dihapus agar tidak memengaruhi hasil rekomendasi. Meskipun jumlahnya cukup signifikan, proporsi data yang besar membuat penghapusan ini tidak akan berdampak signifikan terhadap hasil rekomendasi.
 
 Setelah proses merging, terdapat beberapa missing value pada field di dataset Movies. Hal ini terjadi karena ada beberapa film yang memang belum pernah diberi rating oleh pengguna, atau film tersebut sudah terhapus akibat penghapusan genre `no genres listed`.
 
-![alt text](image-15.png)
+
+![image-15](https://github.com/user-attachments/assets/a11fc0e5-9f10-4dc1-bd27-677cd92792f5)
+
 Nilai null tersebut akan dihapus karena memang sulit untuk diketahui nilainya secara pasti.
 
 ### Handle Duplicated Data
@@ -164,7 +182,8 @@ Pada studi kasus ini, data duplikat akan dihapus dan hanya satu entri yang diper
 
 Setelah merging, terdapat beberapa movieId yang identik karena merging tersebut menggunakan tipe left. nilai duplikat ini dihilangkan karena hanya akan menggunakan data unik untuk dimasukkan ke dalam proses pemodelan
 
-![alt text](image-16.png)
+
+![image-16](https://github.com/user-attachments/assets/86deda2f-f242-42d4-80b9-84fdcd3dd6d5)
 
 Hasil akhir berbeda dengan df_movies, karena pada dataset ini, baris movies yang tidak ter rating di drop juga. menyisakan data movieId unik yang memang ter rating oleh user. Karena rasio dataset masih besar, maka cara ini masih bisa dilakukan
 
@@ -215,13 +234,15 @@ Cosine Similarity mengukur kesamaan antara dua entitas (tiap genre yang telah di
 #### Hasil Top-N Recommendation
 ##### Nearest Neighbors  
 
-![alt text](image-17.png)
+
+![image-17](https://github.com/user-attachments/assets/850a1df7-8e25-497a-9722-7913384e4883)
 
 Hasil Top-N Recommendation dari algoritma Nearest Neighbors diatas menunjukan hasil yang sesuai. Film yang direkomendasikan memiliki genre yang sama dengan film yang menjadi input
 
 ##### Cosine Similarity
 
-![alt text](image-18.png)
+
+![image-18](https://github.com/user-attachments/assets/5f002644-9468-4b26-ac12-6b711fcb871b)
 
 Hasil Top-N Recommendation dari algoritma Cosine Similarity juga menunjukan hasil yang sesuai, hanya saja terdapat perbedaan urutan film yang direkomendasikannya, tetapi dari keseluruhan film, similarity score nya sama, yaitu 1. Artinya genre hasil rekomendasi dengan film input itu identik.
 
@@ -243,13 +264,15 @@ Precision penting untuk menilai kualitas rekomendasi karena semakin tinggi preci
 
 ### Hasil Evaluasi Precision pada Nearest Neighbors
 
-![alt text](image-19.png)
+
+![image-19](https://github.com/user-attachments/assets/371c4b49-f3e7-4f40-a635-2c56ec39ca61)
 
 Berdasarkan hasil evaluasi precision di algoritma Nearest Neighbors, diperoleh nilai precision yang sempurna. Hal ini menunjukkan bahwa seluruh film yang direkomendasikan memiliki genre yang sesuai dengan genre pada film input, sehingga rekomendasi yang dihasilkan sangat relevan.
 
 ### Hasil Evaluasi Precision pada Cosine Similarity
 
-![alt text](image-20.png)
+
+![image-20](https://github.com/user-attachments/assets/f00f332b-a92a-418c-a577-cb4b1e8e8cf9)
 
 Berdasarkan hasil evaluasi precision pada algoritma Cosine Similarity, diperoleh nilai precision yang sempurna. Hal ini menunjukkan bahwa data yang digunakan memiliki representasi fitur yang optimal, sehingga kedua algoritma mampu menghasilkan rekomendasi yang sangat relevan dengan nilai precision maksimal.
 
