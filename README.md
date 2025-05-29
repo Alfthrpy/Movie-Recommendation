@@ -193,8 +193,10 @@ Hasil akhir berbeda dengan df_movies, karena pada dataset ini, baris movies yang
 
 ### Persiapan Dataset
 
-![alt text](image-25.png)
-![alt text](image-26.png)
+![image-25](https://github.com/user-attachments/assets/f4ce91a5-b449-4191-b93d-891e80515e03)
+
+![image-26](https://github.com/user-attachments/assets/30f7ca83-223d-4ec1-a300-c6fa469d4fe4)
+
 Dataset yang digunakan untuk pemodelan dalam studi kasus ini hanyalah field `movieId`, `title` dan `genres` hal ini dilakukan karena pemodelan hanya menggunakan pendekatan Content-Based Filtering
 
 ### Melakukan Encoding
