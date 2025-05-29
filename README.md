@@ -46,6 +46,7 @@ Untuk mencapai tujuan yang telah ditetapkan, solusi yang diusulkan dalam proyek 
 
 
 ## Data Understanding
+### Analysis Variable
 
 Dataset yang digunakan dalam studi kasus ini adalah [Movie Recommendation Datasets](https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system) yang dipublikasikan oleh Manas Parashar di Kaggle. Dataset ini terdiri dari 2 file. 
 
@@ -74,6 +75,31 @@ Satu film bisa memiliki lebih dari 1 genre, format nya menggunakan pipe `|` seba
 Jumlah genre yang terdapat dalam dataset ini sebanyak 20 genre unik, yang mencerminkan keragaman kategori film yang tersedia. Genre-genre tersebut meliputi: 'Adventure', 'Animation', 'Children', 'Comedy', 'Fantasy', 'Romance', 'Drama', 'Action', 'Crime', 'Thriller', 'Horror', 'Mystery', 'Sci-Fi', 'IMAX', 'Documentary', 'War', 'Musical', 'Western', 'Film-Noir', dan '(no genres listed)'.
 
 Keberagaman genre ini memungkinkan sistem rekomendasi untuk memberikan saran film yang lebih bervariasi dan sesuai dengan preferensi pengguna yang beragam. Selain itu, adanya genre '(no genres listed)' menunjukkan bahwa terdapat beberapa film yang tidak memiliki informasi genre, sehingga perlu penanganan khusus pada tahap data preparation agar tidak memengaruhi hasil rekomendasi.
+
+### Dataset Quality
+#### Dataset Movies
+##### Missing Values
+![alt text](image-21.png)
+Untuk kondisi awal dataset, terdapat 5062 baris missing value pada kolom genres. Walau ini tidak secara langsung missing value, jika suatu baris memiliki kolom genre dengan nilai `no genres listed` artinya baris tersebut tidak mempunyai data genre, sedangkan data genre sangatlah penting untuk sistem rekomendasi pendekatan Content-Based Filtering
+
+##### Duplicated Values
+![alt text](image-22.png)
+Untuk kondisi awal dataset, terdapat 82 baris duplikat pada kolom title.
+
+
+#### Dataset Rating
+##### Missing Values
+![alt text](image-23.png)
+Untuk kondisi awal dataset Rating, tidak terdapat missing value
+
+##### Duplicated Values
+![alt text](image-24.png)
+Untuk kondisi awal dataset, tidak terdapat baris duplikat
+
+##### Outliers
+![alt text](images/image-10.png)
+Pada dataset Rating, terdapat outlier berupa pengguna yang memberikan jumlah rating film yang sangat tinggi dibandingkan pengguna lainnya. Namun karena pendekatan yang digunakan adalah Content-Based filtering, maka outlier ini dapat dihiraukan
+
 
 ### Exploratory Data Analysis
 #### Univariate Analysis
